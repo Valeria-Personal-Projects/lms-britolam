@@ -15,19 +15,23 @@ export const NavbarRoutes = () => {
 
     return (
         <div className="flex gap-x-2 ml-auto">
-            { isTeacherPage || isPlayerPage? (
-                <Button className="h-4 gap-x-2 ml-auto">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Salir
-                </Button>
-            ): (
+            {isTeacherPage || isPlayerPage ? (
+                <Link href="/">
+                    <Button size="sm" variant="ghost">
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Salir
+                    </Button>
+                </Link>
+            ) : (
                 <Link href="/teacher/courses">
-                    <Button>
+                    <Button size="sm" variant="ghost">
                         Modo Instructor
                     </Button>
                 </Link>
             )}
-            <UserButton />
+            <UserButton
+                afterSignOutUrl="/"
+            />
         </div>
     )
 }
