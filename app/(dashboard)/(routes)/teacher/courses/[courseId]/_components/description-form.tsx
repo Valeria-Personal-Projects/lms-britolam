@@ -16,29 +16,30 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { title } from "process";
-import { useState } from "react";
 
-interface TitleFormProps {
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
+
+interface DescriptionFormProps {
     initialData: {
-        title: string;
+        description: string;
     };
     courseId: string;
 };
 
 const formSchema = z.object({
-    title: z.string().min(1, {
-        message: "Se requiere título",
+    description: z.string().min(1, {
+        message: "Se requiere descripción",
 
     }),
 });
 
-export const TitleForm = ({
+export const DescriptionForm = ({
     initialData,
     courseId,
-}: TitleFormProps) => {
+}: DescriptionFormProps) => {
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -67,21 +68,24 @@ export const TitleForm = ({
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Título del curso
+                Descripción del curso
                 <Button onClick={toggleEdit} variant="ghost">
                     { isEditing ? (
                         <>Cancelar</>
                     ) : (
                         <>
                             <Pencil className="h-4 w-4 mr-2" />
-                            Editar título
+                            Editar descripción 
                         </>
                     )}
                 </Button>
             </div>
             {!isEditing &&(
-                <p className="text-sm mt-2">
-                    {initialData.title}
+                <p className={cn(
+                    "text-sm mt-2",
+                    !initialData.description && "text-slate-500 italic"
+                )}>
+                    {initialData.description || "Sin descripción"}
                 </p>
             )}
             {isEditing &&(
@@ -92,13 +96,13 @@ export const TitleForm = ({
                     >
                         <FormField 
                             control={form.control}
-                            name="title"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input 
+                                        <Textarea 
                                             disabled={isSubmitting}
-                                            placeholder="p.ej. 'Brit Shalom'"
+                                            placeholder="p.ej. 'Este curso trata sobre...'"
                                             {...field}
                                         />
                                     </FormControl>
