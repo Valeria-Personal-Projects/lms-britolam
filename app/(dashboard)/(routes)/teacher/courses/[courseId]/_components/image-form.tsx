@@ -4,11 +4,11 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Pencil, PlusCircle, ImageIcon, Image } from "lucide-react";
+import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
-// import { Image } from "lucide-react";
+import Image from "next/image";
 
 import {
     Form,
@@ -21,8 +21,6 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea";
 import { FileUpload } from "@/components/file-upload";
 
 interface ImageFormProps {
@@ -108,7 +106,7 @@ export const ImageForm = ({
             )}
             {isEditing && (
                 <div>
-                    <FileUpload 
+                    <FileUpload
                         endPoint="courseImage"
                         onChange={(url) => {
                             if(url) {
