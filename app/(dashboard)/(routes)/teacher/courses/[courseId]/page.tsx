@@ -7,6 +7,7 @@ import { TitleForm } from "./_components/title-form";
 import { DescriptionForm } from "./_components/description-form";
 import { ImageForm } from "./_components/image-form";
 import { CategoryForm } from "./_components/category-form";
+import { PriceForm } from "./_components/price-form";
 
 const CourseIdPage = async ({
     params
@@ -109,6 +110,10 @@ const CourseIdPage = async ({
                                 Vende tu curso
                             </h2>
                         </div>
+                        <PriceForm 
+                            initialData={course}
+                            courseId={course.id}
+                        />
                     </div>
                 </div>
             </div>
