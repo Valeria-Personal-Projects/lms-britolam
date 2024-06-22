@@ -4,7 +4,8 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Pencil, PlusCircle } from "lucide-react";
+import { Loader2, PlusCircle } from "lucide-react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Course, Chapter } from "@prisma/client";
@@ -16,13 +17,11 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form";
-
 import { Button } from "@/components/ui/button";
-
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { title } from "process";
 import { Input } from "@/components/ui/input";
+import { ChaptersList } from "./chapters-list";
 
 interface ChaptersFormProps {
     initialData: Course & {chapters: Chapter[]};
@@ -66,8 +65,33 @@ export const ChaptersForm = ({
         }
     }
 
+    const onReorder = async (updateData: { id: string; position: number }[]) => {
+        try {
+            setIsUpdating(true);
+
+            await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
+                list: updateData,
+            });
+            toast.success("Capítulos reordenados");
+            router.refresh();
+        } catch {
+            toast.error("Algo salió mal")
+        } finally {
+            setIsUpdating(false);
+        }
+    }
+
+    const onEdit = (id: string) => {
+        router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+    }
+
     return (
-        <div className="mt-6 border bg-slate-100 rounded-md p-4">
+        <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
+            {isUpdating && (
+                <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-md flex items-center justify-center">
+                    <Loader2 className="animate-spin h-6 w-6 text-sky-700" />
+                </div>
+            )}
             <div className="font-medium flex items-center justify-between">
                 Capítulos del curso
                 <Button onClick={toggleCreating} variant="ghost">
@@ -119,7 +143,11 @@ export const ChaptersForm = ({
                     !initialData.chapters.length && "text-slate-500 italic"
                 )}>
                     {!initialData.chapters.length && "Sin capítulos"}
-                    {/* TODO: ADD A LIST OF CHAPTERS */}
+                    <ChaptersList
+                        onEdit={onEdit}
+                        onReorder={onReorder}
+                        items={initialData.chapters || []}
+                    />
                 </div>
             )}
             {!isCreating && (
