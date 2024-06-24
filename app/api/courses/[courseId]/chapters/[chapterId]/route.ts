@@ -1,7 +1,10 @@
+import { google, youtube_v3 } from 'googleapis';
+import { OAuth2Client } from 'google-auth-library';
 import Mux from "@mux/mux-node";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+import fs from 'fs';
 import { db } from "@/lib/db";
 
 const mux = new Mux({
@@ -42,7 +45,7 @@ export async function PATCH(
             },
         });
 
-       if (values.videoUrl) {
+        if (values.videoUrl) {
             const existingMuxData = await db.muxData.findFirst({
                 where: {
                     chapterId: params.chapterId,
