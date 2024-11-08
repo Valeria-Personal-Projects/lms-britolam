@@ -1,10 +1,8 @@
-import { HomeNavbarRoutes } from "@/app/home/_components/home-navbar-routes";
-import { HomeMobileSidebar } from "./home-mobile-sidebar";
+import { MobileHeader } from "./mobile-header";
 import { ArrowRight, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-// import { Logo } from "@/app/(dashboard)/_components/logo"
 
 export const Header = () => {
     return(
@@ -25,7 +23,8 @@ export const Header = () => {
                             alt="logo"
                             src="/logo.svg"
                         />
-                        <Menu className="h-5 w-5 md:hidden" />
+                        {/* <Menu className="h-5 w-5 md:hidden" /> */}
+                        <MobileHeader />
                         <nav className="hidden md:flex gap-6 items-center">
                             <a href="#">Inicio</a>
                             <a href="#">Nosotros</a>

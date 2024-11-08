@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { Header } from "./_components/header";
-import { Logo } from "@/app/(dashboard)/_components/logo"
+import { MobileHeader } from "./_components/mobile-header";
 
 const HomePage = async () => {
     const { userId } = auth();
