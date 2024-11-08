@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export const Header = () => {
     return(
-        <header className="sticky top-0">
+        <header className="sticky top-0 backdrop-blur-sm">
             <div className="flex justify-center items-center py-3 bg-primary text-white text-sm gap-3">
                 <p className="text-white/60 hidden md:block">Conéctate con la comunidad Noájida</p>
                 <div className="inline-flex gap-1 items-center">

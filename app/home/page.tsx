@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { Header } from "./_components/header";
 import { MobileHeader } from "./_components/mobile-header";
+import Hero from "./_components/hero";
 
 const HomePage = async () => {
     const { userId } = auth();
@@ -10,12 +11,8 @@ const HomePage = async () => {
     }
     return ( 
         <div className="h-full">
-            {/* <div className="p-6">
-                <Logo />
-            </div> */}
-            {/* <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50"> */}
                 <Header />
-            {/* </div> */}
+                <Hero />
             home page!
         </div>
      );
