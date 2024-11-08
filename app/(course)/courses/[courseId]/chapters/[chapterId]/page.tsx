@@ -20,7 +20,7 @@ const ChapterIdPage = async ({
     const { userId } = auth();
 
     if (!userId) {
-        return redirect("/");
+        return redirect("/home");
     }
 
     const {

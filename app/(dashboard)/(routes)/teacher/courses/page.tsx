@@ -9,7 +9,7 @@ const CoursesPage = async () => {
     const { userId } = auth();
 
     if (!userId){
-        return redirect("/");
+        return redirect("/home");
     }
     
     const courses = await db.course.findMany({
