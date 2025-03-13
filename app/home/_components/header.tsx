@@ -27,10 +27,7 @@ export const Header = () => {
                         <MobileHeader />
                         <nav className="hidden md:flex gap-6 items-center">
                             <a href="#">Inicio</a>
-                            <a href="#">Nosotros</a>
-                            <a href="#">Mision</a>
-                            <a href="#">Vision</a>
-                            <a href="#">Contactanos</a>
+                            
                             <Link href="/sign-in">
                                 <Button className="px-4 py-2 inline-flex justify-center" size="sm" variant="default">
                                     Iniciar Sesión
