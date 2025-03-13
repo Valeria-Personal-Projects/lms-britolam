@@ -6,6 +6,8 @@ html,
 body,
 :root {
   height: 100%;
+  overflow-x: hidden; 
+  /* verify in all cases IMPORTANT! */
 }
 
 @layer base {
@@ -102,7 +104,6 @@ body,
   align-items: center;
   justify-content: center;
   width: 100%;
-  /* overflow-x: hidden; */
   position: relative;
 }
 
@@ -124,13 +125,16 @@ body,
   align-items: center;
   justify-content: center;
   width: 100%;
-  /* overflow-x: hidden; */
   position: relative;
 }
 
 .gallery-container img{
   display: block;
   object-fit: contain;
+}
+
+.perspective{
+  perspective: 2200px;
 }
 
 @import "~@uploadthing/react/styles.css"

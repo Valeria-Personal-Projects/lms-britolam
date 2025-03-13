@@ -1,18 +1,53 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import bg from "@/public/rainbow-bg.jpg";
 import { Header } from "./header";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLayoutEffect } from "react";
+import { CarTaxiFront } from "lucide-react";
+import { useRef } from "react";
 
+gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
+    const bg1 = useRef(null);
+    const img_container = useRef(null);
+    const img = useRef(null);
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: bg1.current,
+                pin: bg1.current,
+                pinSpacer: false,
+                start: "top top",
+                endTrigger: ".last",
+                end: "bottom bottom"
+            });
+
+            gsap.timeline({
+                // scrollTrigger: {
+                scrollTrigger: {
+                    trigger: img_container.current,
+                    pin: img_container.current,
+                    scrub: 1,
+                    start: "0% 0%",
+                },
+            }).to(img.current, { transform: "translateZ(2200px)" });
+        })
+
+        return () => ctx.revert();
+    }, []);
     return (
         // <section className="pt-8 pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#2D5CA5,#ffffff_66%)]">
         <>
             <div className="relative">
-                <div className="bg bg-[#ffff] absolute h-screen w-screen z-[-1]">
+                <div ref={bg1} className="bg bg-[#ffff] absolute h-screen w-screen z-[-1]">
                     <section>
-                        <div className="img-container flex items-center justify-center h-screen w-screen">
-                            <img className="image" src="/rainbow-bg.jpg" alt="rainbow" />
+                        <div ref={img_container} className="img-container perspective flex items-center justify-center h-screen w-screen">
+                            <img ref={img} className="image" src="/rainbow-bg.jpg" alt="rainbow" />
                             <div className="text-black absolute flex flex-col items-center justify-center">
                                 <h1 className="text-[100px]">
                                     <span className="text-stroke">Brit Olam Bolivia</span> Learn
@@ -31,7 +66,7 @@ const Hero = () => {
                             </div>
                             <div className="col-2 flex flex-col gap-16">
                                 <img className="w-[600px] h-[400px]" src="man.png" alt="" />
-                                <img className="w-[400px] h-[400px]" src="man.png" alt="" />
+                                <img className="w-[400px] h-[400px] last" src="man.png" alt="" />
                             </div>
                         </div>
                     </section>

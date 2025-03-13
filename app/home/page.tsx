@@ -10,7 +10,7 @@ const HomePage = async () => {
         redirect("/")
     }
     return ( 
-        <div className="h-full overflowx">
+        <div className="h-full ">
                 <Hero />
                 <Header />
             home page!
