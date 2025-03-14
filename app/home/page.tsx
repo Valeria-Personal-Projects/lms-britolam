@@ -11,9 +11,9 @@ const HomePage = async () => {
     }
     return ( 
         <div className="h-full ">
+        {/* <div>*/}
                 <Hero />
-                <Header />
-            home page!
+                {/* <Header /> */}
         </div>
      );
 }
